@@ -28,12 +28,11 @@ module.exports = (app) => {
     // 设置跨域问题
     app.use(cors({
         origin: (ctx) => {
-            // console.log(ctx.url.substr(0, 8));
-            if (ctx.url.substr(0, 8) === '/manager') {
+            /*if (ctx.url.substr(0, 8) === '/manager') {
                 return 'http://localhost:8080';
-            }
-            /*return ['http://localhost:8084', 'http://localhost:8080'];*/
-            return 'http://localhost:8084';
+            }*/
+            return ctx.header.origin;
+            // return 'http://localhost:8084';
         },
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
         maxAge: 5,
