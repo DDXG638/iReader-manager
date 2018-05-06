@@ -31,7 +31,8 @@ module.exports = (app) => {
             /*if (ctx.url.substr(0, 8) === '/manager') {
                 return 'http://localhost:8080';
             }*/
-            return ctx.header.origin;
+            // return ctx.header.origin;
+            return "*";
             // return 'http://localhost:8084';
         },
         exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
