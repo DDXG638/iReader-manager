@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %} {% endblock %}
+    {% block head %}
+
+    {% endblock %}
+</head>
+<body>
+    <!-- 引入header -->
+    {% include "./header.html" %}
+
+    {% block body%}
+    {% endblock %}
+
+    <!-- 引入footer -->
+    {% include "./footer.html" %}
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
