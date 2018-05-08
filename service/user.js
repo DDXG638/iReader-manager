@@ -111,6 +111,11 @@ module.exports = {
         let res = await User.update({username}, {$push: {collectIds: {_id: id}}});
         return res;
     },
+    // 修改用户信息
+    setUserInfo: async (userId, headimgurl, nickname) => {
+        let res = await User.update({_id: userId}, {$set: {headimgurl, nickname}});
+        return res;
+    },
     // 后台管理-获取所有用户信息(分页)
     getUsersAll: async (skipNum = 0, pageCountNum = 10) => {
         let res = await User.find({}, '-password -collectIds -comments').skip(skipNum).limit(pageCountNum);

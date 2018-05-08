@@ -44,6 +44,8 @@ module.exports = (app) => {
     router.post("/user/login", UserController.login);
     // 用户-检验用户名是否存在
     router.post("/user/checkedUser", UserController.checkedUser);
+    // 用户-修改用户信息
+    router.post("/user/setUserInfo", UserController.setUserInfo);
     // 用户-点赞、收藏、评论
     router.post("/user/operation", ApiController.UserOperation);
     // 根据新闻获取点赞的用户信息

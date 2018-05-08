@@ -74,7 +74,7 @@ module.exports = {
                 });
             } else {
                 ctx.send({
-                    code: 0,
+                    code: 1009,
                     data: {},
                     msg: '收藏失败！'
                 });
@@ -92,6 +92,41 @@ module.exports = {
                 code: 0,
                 data: {},
                 msg: '不明的指令'
+            });
+        }
+    },
+    // 修改用户信息
+    setUserInfo: async (ctx, next) => {
+        let {headimgurl, nickname, userId} = ctx.request.body;
+        if (!userId) {
+            ctx.send({
+                code: 1003,
+                data: '',
+                msg: '未登录'
+            });
+            return;
+        }
+
+        let res = await  UserService.setUserInfo(userId, headimgurl, nickname);
+        if (res.ok === 1) {
+            if (res.n === 1 && res.nModified >= 1) {
+                ctx.send({
+                    code: 0,
+                    data: {},
+                    msg: '更改用户信息成功！'
+                });
+            } else {
+                ctx.send({
+                    code: 1008,
+                    data: {},
+                    msg: '数据未修改成功！'
+                });
+            }
+        } else {
+            ctx.send({
+                code: 1006,
+                data: res,
+                msg: '更改用户信息失败!'
             });
         }
     },
