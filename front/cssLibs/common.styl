@@ -1,0 +1,59 @@
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: PingFangSC-Regular, "Droid Sans", "Droid Sans Fallback", Arial, "Helvetica Neue", Roboto, "Heiti SC", sans-self;
+    /* 禁止文字自动调整大小 */
+    -webkit-text-size-adjust: none;
+}
+
+* {
+    /* 禁止文字可选，对于P标签未生效，采用JS屏蔽可选 */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* 高亮 */
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/* 解决safari上input无法输入的问题 */
+input,
+textarea {
+    user-select: text;
+}
+
+.wrapper {
+    margin: 0 auto;
+    max-width: 720px;
+}
+
+.hidden {
+    display: none;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+$single-line {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-red {
+    color: #F84141;
+}
+
+.text-purple {
+    color: #7754FA;
+}

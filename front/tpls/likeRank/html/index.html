@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 44.44px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit|chrome">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge">
+    <!-- 预加载DNS -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//www.jingyu.com/"/>
+    <link rel="dns-prefetch" href="//m.jingyu.com/"/>
+    <!-- 禁止自动缩放字体 -->
+    <meta name="wap-font-scale" content="no">
+    <title>{%if !empty($data['windowTitle'])%}{%$data['windowTitle']%}{%else%}男a女免最赞排行榜{%/if%}</title>
+    <script>
+        (function () {
+            // html初始fontSize = 320 / 7.2 = 44.44
+            // 根据屏幕宽度修改font-size基准
+            function calcFontSize() {
+                var html = document.documentElement,
+                    windowWidth = html.clientWidth,
+                    width = 720,
+                    unit = width / 100;
+
+                if (windowWidth > width) {
+                    windowWidth = width;
+                }
+                html.style.fontSize = windowWidth / parseFloat(unit.toFixed(2)) + 'px';
+            }
+
+            calcFontSize();
+            window.onresize = calcFontSize;
+            document.addEventListener('DOMContentLoaded', calcFontSize, false);
+        })();
+    </script>
+    <link inline href="../../likeRank/dist/css/index.css" rel="stylesheet">
+    <link inline href="../../../jsLibs/swiper-3.4.2.min.css" rel="stylesheet">
+</head>
+<body>
+<div class='wrapper'>
+    <!--<header><a href="javascript:history.go(-1);" class="back"></a><span>最赞排行榜</span></header>-->
+    <div class="banner"></div>
+    <div class="tab">
+        <a href="javascript:;" class="sel" data-sex="1">女生榜</a>
+        <a href="javascript:;" data-sex="0">男生榜</a>
+    </div>
+    <div class="mood-list js-type-0" style="display: none;">
+        {%foreach $boyDiaryList as $index => $item%}
+        <div class="mood-feed">
+            <span class="rank rank-{%$index+1%}">{%$index+1%}</span>
+            <div class="intro">
+                <img src="{%$item['imageid']%}">
+                <h3>{%$item['nickname']%}</h3>
+                <p><span>读了{%$item['bookCount']%}本书</span><span>{%$item['photoCount']%}张照片</span> <span>{%$item['voiceCount']%}条语音</span></p>
+            </div>
+            <div class="content">
+                {%$item['content']%}
+            </div>
+            <div class="thumbnail">
+                {%foreach $boyDiaryList['resourceList'] as $res%}
+                <img src="{%$res['thumbUrl']%}">
+                {%/foreach%}
+            </div>
+            <div class="like">{%$item['likeCount']%}个赞</div>
+        </div>
+        {%/foreach%}
+    </div>
+    <div class="mood-list js-type-1">
+        {%foreach $girlDiaryList as $index => $item%}
+        <div class="mood-feed">
+            <span class="rank rank-{%$index+1%}">{%$index+1%}</span>
+            <div class="intro">
+                <img src="{%$item['imageid']%}">
+                <h3>{%$item['nickname']%}</h3>
+                <p><span>读了{%$item['bookCount']%}本书</span><span>{%$item['photoCount']%}张照片</span> <span>{%$item['voiceCount']%}条语音</span></p>
+            </div>
+            <div class="content">
+                {%$item['content']%}
+            </div>
+            {%if $item['type'] == 1%}
+            <div class="thumbnail">
+                {%foreach $item['resourceList'] as $res%}
+                    <div class="imgs" data-url="{%$res['url']%}">
+                        <div class="img-box">
+                            <img src="{%$res['thumbUrl']%}">
+                        </div>
+                    </div>
+                {%/foreach%}
+            </div>
+            {%elseif $item['type'] == 2%}
+            <div class="media-res">
+                {%foreach $item['resourceList'] as $res%}
+                    <a href="#" class="jplayer" media-src="{%$res['url']%}"></a>
+                {%/foreach%}
+            </div>
+            {%/if%}
+            <div class="like">{%$item['likeCount']%}个赞</div>
+        </div>
+        {%/foreach%}
+    </div>
+</div>
+<div class="swiper-mask">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+        </div>
+    </div>
+</div>
+<script inline src="../../../jsLibs/zepto.new.min.js"></script>
+<script inline src="../../../jsLibs/swiper-3.4.2.jquery.min.js"></script>
+<script inline src="../../likeRank/dist/js/index.js"></script>
+</body>
+</html>

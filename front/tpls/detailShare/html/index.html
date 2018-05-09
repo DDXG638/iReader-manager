@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 44.44px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit|chrome">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge">
+    <!-- 禁止自动缩放字体 -->
+    <meta name="wap-font-scale" content="no">
+    <title>新闻详情</title>
+    <script>
+        (function () {
+            // html初始fontSize = 320 / 7.2 = 44.44
+            // 根据屏幕宽度修改font-size基准
+            function calcFontSize() {
+                var html = document.documentElement,
+                    windowWidth = html.clientWidth,
+                    width = 720,
+                    unit = width / 100;
+
+                if (windowWidth > width) {
+                    windowWidth = width;
+                }
+                html.style.fontSize = windowWidth / parseFloat(unit.toFixed(2)) + 'px';
+            }
+
+            calcFontSize();
+            window.onresize = calcFontSize;
+            document.addEventListener('DOMContentLoaded', calcFontSize, false);
+        })();
+    </script>
+    <link inline href="../dist/css/index.css" rel="stylesheet">
+</head>
+<body>
+<div class='wrapper'>
+    <div class="article_info">
+        <h1 class="title">{{json.title}}</h1>
+        <span class="befrom">{{json.befrom}}</span>
+        <span class="newstime">{{json.newstime}}</span>
+    </div>
+    <section class="article_content">
+        <div class="content_html">{{json.newstext | safe}}</div>
+    </section>
+
+    {% if json.comments.length > 0 %}
+    <div class="bg_line"></div>
+    <div class="comment-hot">
+        <div class="comment_title">
+            <div class="Line">
+                <div class="title">用户热评</div>
+            </div>
+        </div>
+
+        <section class='comment_item'>
+            {% for itemJson in json.comments %}
+                <div class='topFooter'>
+                    <div class="top">
+                        <img src="{{itemJson.fromUser.headimgurl}}" class="portrait">
+                        <div class="name">{{itemJson.fromUser.nickname}}</div>
+                    </div>
+                    <div class="mid">
+                        <div class="content_text">
+                            {{itemJson.content}}
+                        </div>
+                    </div>
+                    <div class="footer">
+                        {% if  itemJson.plnum > 0%}
+                        <span class="reply">{{itemJson.plnum}}回复 · </span>
+                        {% endif %}
+                        {% if  itemJson.likeNum %}
+                        <span class="zan" v-if='itemJson.likeNum'>{{itemJson.likeNum}}赞 · </span>
+                        {% endif %}
+                        <span class="time" v-if='itemJson.time'>{{itemJson.time}}</span>
+                    </div>
+                </div>
+            {% endfor %}
+        </section>
+
+
+    </div>
+    {% endif %}
+</div>
+
+<div class="share-card-container-test2 share-card-container-true">
+    <div>
+        <span class="share-card-avatar-container">
+            <img class="share-card-avatar" src="http://p6iiiwy0l.bkt.clouddn.com/app_logo_big.png">
+        </span>
+        <span class="share-card-text">
+            <p class="share-card-name">你的好友</p>在用
+            <span class="share-card-toutiao">正好咨询 </span>邀你一起
+        </span>
+        <span class="share-card-btn">打开</span>
+        <img class="share-card-close-btn" src="http://p6iiiwy0l.bkt.clouddn.com/close_btn.png">
+    </div>
+</div>
+
+<script inline src="../../../jsLibs/zepto.new.min.js"></script>
+<script inline src="../dist/js/index.js"></script>
+</body>
+</html>

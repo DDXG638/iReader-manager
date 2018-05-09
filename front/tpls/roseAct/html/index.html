@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 44.44px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit|chrome">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge">
+    <!-- 预加载DNS -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//www.jingyu.com/"/>
+    <link rel="dns-prefetch" href="//m.jingyu.com/"/>
+    <!-- 禁止自动缩放字体 -->
+    <meta name="wap-font-scale" content="no">
+    <title>{%if !empty($data['windowTitle'])%}{%$data['windowTitle']%}{%else%}男a女免送玫瑰活动{%/if%}</title>
+    <script>
+        (function () {
+            // html初始fontSize = 320 / 7.2 = 44.44
+            // 根据屏幕宽度修改font-size基准
+            function calcFontSize() {
+                var html = document.documentElement,
+                    windowWidth = html.clientWidth,
+                    width = 720,
+                    unit = width / 100;
+
+                if (windowWidth > width) {
+                    windowWidth = width;
+                }
+                html.style.fontSize = windowWidth / parseFloat(unit.toFixed(2)) + 'px';
+            }
+
+            calcFontSize();
+            window.onresize = calcFontSize;
+            document.addEventListener('DOMContentLoaded', calcFontSize, false);
+        })();
+    </script>
+    <link inline href="../dist/css/index.css" rel="stylesheet">
+</head>
+<body>
+<div class='wrapper'>
+    <!--<header><a href="javascript:history.go(-1);" class="back"></a><span>玫瑰活动</span></header>-->
+    <div class="banner"></div>
+    <div class="topic">
+        <h2>今日话题</h2>
+        <p><span class="topic-tag">#{%$topicData['today']['title']%}#</span></p>
+        <p>{%$topicData['today']['content']%}</p>
+        <h2>心情要求</h2>
+        <p>图片+文字，图片和文字内容贴合话题，并在文字中附带上今日<span class="topic-tag">#话题#</span></p>
+    </div>
+    <div class="mood-list">
+        <div class="mood-feed">
+            <div class="intro">
+                <img src="//file.ihuayue.cn/group1/M00/04/B9/Chtgd1mjhzCACHeZAAAiFM-vbPY054.png">
+                <h3>橘子的味道</h3>
+                <p><span>读了4本书</span> <span>5张照片</span> <span>1条语音</span></p>
+            </div>
+            <div class="content">
+                <span class="topic-tag">#女生自拍修图前和修图后会有多大差别#</span>拿出了我压箱底的照片，希望不会掉粉
+            </div>
+            <div class="thumbnail">
+                <div class="imgs">
+                    <div class="img-box">
+                        <img src="//file.ihuayue.cn/group1/M00/04/BA/ChtgcVmjhzCAVZYBAAELUp0--D0858.png">
+                    </div>
+                </div>
+                <div class="imgs">
+                    <div class="img-box">
+                        <img src="//file.ihuayue.cn/group1/M00/04/BA/ChtgcVmjhzCARQvUAAEBS505Ox4376.png">
+                    </div>
+                </div>
+                <div class="imgs">
+                    <div class="img-box">
+                        <img src="//file.ihuayue.cn/group1/M00/04/B9/Chtgd1mjhzCASGtrAAE1jktwFMU430.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="note">
+        <ul>
+            <li><em>1</em>活动期间，每天发一条符合要求的心情，如果心情获得了点赞，就可以得到一朵玫瑰，我们会在第二天直接将玫瑰发送至您的账号</li>
+            <li><em>2</em>活动时间：2017-08-28 至 2017-09-01</li>
+            <li><em>3</em>今日话题：#{%$topicData['today']['title']%}#</li>
+        </ul>
+    </div>
+    <footer><a href="javascript:;" onclick="AppJsBridge.goSendImgDiary()">去发布心情</a></footer>
+</div>
+<script inline src="../../../jsLibs/jsBridge.js"></script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 44.44px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit|chrome">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge">
+    <!-- 预加载DNS -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//www.jingyu.com/"/>
+    <link rel="dns-prefetch" href="//m.jingyu.com/"/>
+    <!-- 禁止自动缩放字体 -->
+    <meta name="wap-font-scale" content="no">
+    <title>完善资料有奖</title>
+    <script>
+        (function () {
+            // html初始fontSize = 320 / 7.2 = 44.44
+            // 根据屏幕宽度修改font-size基准
+            function calcFontSize() {
+                var html = document.documentElement,
+                    windowWidth = html.clientWidth,
+                    width = 720,
+                    unit = width / 100;
+
+                if (windowWidth > width) {
+                    windowWidth = width;
+                }
+                html.style.fontSize = windowWidth / parseFloat(unit.toFixed(2)) + 'px';
+            }
+
+            calcFontSize();
+            window.onresize = calcFontSize;
+            document.addEventListener('DOMContentLoaded', calcFontSize, false);
+        })();
+    </script>
+    <link inline href="../../perfectData/dist/css/index.css" rel="stylesheet">
+    <link inline href="../../../jsLibs/swiper-3.4.2.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class='wrapper'>
+        <div class="topPart">
+            <img class="img-status" src="//file.ihuayue.cn/group1/M00/06/51/Chtgd1nEhz6AVgezAACqN4cuIX4134.png" alt="">
+        </div>
+
+        <div class="middlePart">
+            <div class="box">
+                <i class="ico ico-1"></i>
+                <span class="title">完善生日</span>
+
+                {%if empty($data.birthday)%}
+                <button class="pull-right js-birth status-btn">
+                    <span class="status-text">去完成</span>
+                </button>
+                {%else%}
+                <button class="pull-right status-btn js-birth status-finish">
+                    <i class="status-ico"></i>
+                    <span class="status-text">完成</span>
+                </button>
+                {%/if%}
+            </div>
+
+            <div class="box">
+                <i class="ico ico-2"></i>
+                <div class="titled">
+                    <h6 class="big-title">完善标签</h6>
+                    <h6 class="small-title">完善步骤1、2领1朵玫瑰</h6>
+                </div>
+
+                {%if !empty($data.tag)%}
+                    {%foreach $data.jobs as $index => $item%}
+                        {%if $item['task_id'] == 4%}
+                            {%if $item['status'] != 0%}
+                            <button class="pull-right status-btn js-labelling status-finish" disabled>
+                                <i class="status-ico"></i>
+                                <span class="status-text">完成</span>
+                            </button>
+                            {%else%}
+                            <button class="pull-right status-btn js-label-getting status-get">
+                                <span class="status-text">领取</span>
+                            </button>
+                            {%/if%}
+                        {%/if%}
+                    {%/foreach%}
+                {%else%}
+                    <button class="pull-right js-labelling status-btn">
+                        <span class="status-text">去完成</span>
+                    </button>
+                {%/if%}
+
+            </div>
+            <div class="box">
+                <i class="ico ico-3"></i>
+                <div class="titled">
+                    <h6 class="big-title">完善个性签名</h6>
+                    <h6 class="small-title">完善全部领100金券</h6>
+                </div>
+
+                {%if !empty($data.personalIntro)%}
+                    {%foreach $data.jobs as $index => $item%}
+                        {%if $item['task_id'] == 5%}
+                            {%if $item['status'] != 0%}
+                            <button class="pull-right status-btn js-autograph status-finish" disabled>
+                                <i class="status-ico"></i>
+                                <span class="status-text">完成</span>
+                            </button>
+                            {%else%}
+                            <button class="pull-right status-btn js-autograph-getting status-get">
+                                <span class="status-text">领取</span>
+                            </button>
+                            {%/if%}
+                        {%/if%}
+                    {%/foreach%}
+                {%else%}
+                    <button class="pull-right js-autograph status-btn">
+                        <span class="status-text">去完成</span>
+                    </button>
+                {%/if%}
+
+            </div>
+        </div>
+
+        <div class="bottomPart">
+            <a href="/appPage/jingyuCourse">
+                <img src="//file.ihuayue.cn/group1/M00/05/D8/Chtgd1m6Wt6ANSRmAABOH5V_pBQ626.png" alt="">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        var isLogin = {%if $isLogin%}true{%else%}false{%/if%};
+        var isBirthday = {%if $data.birthday && $data.birthday.length>0%}true{%else%}false{%/if%};
+        var isLabel = {%if empty($data.tag)%}false{%else%}true{%/if%};
+        var isAutograph = {%if empty($data.personalIntro)%}false{%else%}true{%/if%};
+    </script>
+    <script inline src="../../../jsLibs/zepto.new.min.js"></script>
+    <script inline src="../../../node_modules/hy-js-bridge/jsBridge.js"></script>
+    <script inline src="../../../jsLibs/utils.js"></script>
+    <script inline src="../dist/js/index.js"></script>
+</body>
+</html>

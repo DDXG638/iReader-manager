@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" style="font-size: 44.44px;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit|chrome">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-COMPATIBLE" content="IE=Edge">
+    <!-- 预加载DNS -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+    <link rel="dns-prefetch" href="//www.jingyu.com/"/>
+    <link rel="dns-prefetch" href="//m.jingyu.com/"/>
+    <!-- 禁止自动缩放字体 -->
+    <meta name="wap-font-scale" content="no">
+    <title>鲸鱼课堂</title>
+    <script>
+        (function () {
+            // html初始fontSize = 320 / 7.2 = 44.44
+            // 根据屏幕宽度修改font-size基准
+            function calcFontSize() {
+                var html = document.documentElement,
+                    windowWidth = html.clientWidth,
+                    width = 720,
+                    unit = width / 100;
+
+                if (windowWidth > width) {
+                    windowWidth = width;
+                }
+                html.style.fontSize = windowWidth / parseFloat(unit.toFixed(2)) + 'px';
+            }
+
+            calcFontSize();
+            window.onresize = calcFontSize;
+            document.addEventListener('DOMContentLoaded', calcFontSize, false);
+        })();
+    </script>
+    <link inline href="../dist/css/index.css" rel="stylesheet">
+    <link inline href="../../../jsLibs/swiper-3.4.2.min.css" rel="stylesheet">
+</head>
+<body>
+<div class='wrapper'>
+    <section class="topImg">
+        <img src="//file.ihuayue.cn/group2/M00/05/F8/ChtgdFm55QWAKDRUAAB3BmCw4Ho532.png" alt="">
+    </section>
+    <section class="btnGroup">
+        <div class="row js-toSocial">
+            <span class="front"></span>
+            <span class="text">鲸鱼社交功能</span>
+            <span class="go "></span>
+        </div>
+        <div class="row js-rose">
+            <span class="front"></span>
+            <span class="text">如何发起聊天？</span>
+            <span class="go "></span>
+        </div>
+        <div class="row js-getRose">
+            <span class="front"></span>
+            <span class="text">玫瑰是什么？</span>
+            <span class="go "></span>
+        </div>
+    </section>
+</div>
+
+<div class="wrapper-content hidden">
+    <div class="content">
+        <h3 class="title"></h3>
+        <div class="text"></div>
+    </div>
+</div>
+<script inline src="../../../jsLibs/zepto.new.min.js"></script>
+<script inline src="../../../jsLibs/swiper-3.4.2.jquery.min.js"></script>
+<script inline src="../dist/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,233 @@
+@import '../../../cssLibs/reset.styl';
+@import '../../../cssLibs/common.styl';
+
+.wrapper {
+    padding-top: 1.5rem;
+
+    .article_info {
+        font-size: 12px;
+        overflow: hidden;
+        background: #fff;
+        padding: 0 0.2rem 0.3rem;
+        border-bottom: 1px solid #eee;
+        background: #fff;
+        .title {
+            color: #000;
+            font-size: .4rem;
+            line-height: .5rem;
+            font-weight: 700;
+            padding: .2rem 0;
+        }
+        .befrom {
+            margin-right: 5px;
+        }
+    }
+
+    .article_content {
+        position: relative;
+        color: #333;
+        font-size: 18px !important;
+        line-height: .58rem;
+        padding: 0.2rem 0.2rem 0;
+        .content_html {
+            overflow: hidden;
+            text-indent: none !important;
+            font-size: inherit;
+            img {
+                width: 100% !important;
+                height: auto !important;
+            }
+            img[type="icon"]{
+                width: initial!important;
+            }
+            *{
+                text-indent: inherit !important;
+                font-size: inherit !important;
+                font-family: inherit !important;
+                line-height: inherit !important;
+                text-align: justify !important;
+                text-justify: inter-ideograph !important;
+            }
+            div,p{
+                width: 100% !important;
+                padding-bottom: .26rem;
+            }
+        }
+    }
+    .comment-hot {
+        padding: 0.533rem 0 0;
+        background: #f9f9f9;
+        .comment_title {
+            margin-bottom: 0.4rem;
+            position: relative;
+            .Line {
+                position: relative;
+                width: 2.8rem;
+                margin: 0 auto;
+                text-align: center
+                &:before {
+                    content: "";
+                    border-top: 2px solid #aaa;
+                    display: block;
+                    position: absolute;
+                    width: 0.4rem;
+                    top: 50%;
+                    left: 0
+                }
+                &:after {
+                    content: "";
+                    border-top: 2px solid #aaa;
+                    display: block;
+                    position: absolute;
+                    width: 0.4rem;
+                    top: 50%;
+                    right: 0
+                }
+            }
+            .title {
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+
+        .comment_item {
+            position: relative;
+            margin: 0 16px;
+
+            .topFooter{
+                padding: 15px 0;
+                border-bottom: 1px solid #eee;
+                .top{
+                    .portrait{
+                        vertical-align: middle;
+                        width: 30px;
+                        height: 30px;
+                        overflow: hidden;
+                        border-radius: 50%;
+                    }
+                    .name {
+                        display: inline-block;
+                        vertical-align: middle;
+                        color: #007aff;
+                        overflow: hidden;
+                        text-align: left;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        font-size: 14px;
+                        padding-left: 5px;
+                    }
+                }
+                .mid{
+                    margin-top: 6px;
+                    font-size: 16px;
+                    .content_text {
+                        position: relative;
+                        word-wrap: break-word;
+                    }
+                    .altUser_name{
+                        color: #007aff;
+                        text-decoration: none;
+                    }
+                }
+                .footer{
+                    margin-top: 6px;
+                    font-size: 12px;
+                    color: #888;
+                    span{
+                        padding: 4px 0;
+                    }
+                    .delete{
+                        float: right;
+                        padding: 0 5px;
+                    }
+                }
+            }
+        }
+    }
+    .bg_line {
+        height: 0.1333rem;
+        background: #eee;
+    }
+
+}
+
+.share-card-container-test2 {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: #fff;
+    transition: 600ms cubic-bezier(.165, .84, .44, 1);
+    box-shadow: 0 1px 6px 0 rgba(0,0,0,0.5);
+    height: 64px;
+
+    .share-card-avatar-container {
+        position: absolute;
+        left: 13px;
+        top: 6px;
+        width: 50px;
+        height: 50px;
+
+        .share-card-avatar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 100%;
+            height: 100%;
+        }
+
+        .share-card-icon {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 16px;
+            height: 16px;
+        }
+    }
+
+    .share-card-text {
+        display: inline-block;
+        position: absolute;
+        line-height: 21px;
+        left: 74px;
+        top: 10px;
+        font-size: .24rem;
+
+        .share-card-name {
+            font-weight: 600;
+            font-size: .28rem;
+            line-height: .4rem;
+        }
+
+        .share-card-toutiao {
+            font-weight: 600;
+            color: #f85959;
+        }
+    }
+
+    .share-card-btn {
+        position: absolute;
+        text-align: center;
+        background-color: #f85959;
+        color: #fff;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        right: 37px;
+        width: 72px;
+        height: 29px;
+        line-height: 29px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
+}
+
+.share-card-close-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    width: 10px;
+    height: 10px;
+    padding: 5px;
+}

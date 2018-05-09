@@ -112,6 +112,23 @@ module.exports = {
             });
         }
     },
+    // 新闻详情页面-分享页面
+    getNewsDetailShare: async (ctx, next) => {
+        let id = ctx.params.id;
+        let res = await InfoService.getNewsDetail(id);
+        // console.log(res);
+        if (res) {
+            await ctx.render("app/detailShare", {json: res});
+        } else {
+            await ctx.render("errorPage/500",
+                {
+                    status: "1006",
+                    env: "development",
+                    error: "获取新闻数据失败",
+                    stack: ""
+                });
+        }
+    },
     getNewsListManager: async (ctx, next) => {
         let {classid, page, count} = ctx.request.body;
         // console.log(ctx.request.query);

@@ -19,6 +19,9 @@ module.exports = (app) => {
 
     router.get('/user', HomeController.user);
 
+    // 新闻详情页-分享页面
+    router.get("/appPage/detailShare/:id", ApiController.getNewsDetailShare);
+
     // post提交获取数据
     // router.post("/user/register", HomeController.register);
 

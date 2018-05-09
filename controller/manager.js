@@ -21,7 +21,6 @@ module.exports = {
     // 爬取今日头条的新闻信息
     getNewsInfo: async (ctx, next) => {
         let tagName = ctx.request.query.tag || '';
-        // console.log(tagName);
         if (tagName.length < 1) {
             ctx.send({
                 cond: 1003,
@@ -54,7 +53,6 @@ module.exports = {
         };
 
         let dataArr = await fetchNewsListsData(tagName);
-        // console.log("获得的新闻条数：", dataArr.length);
         // 记录成功插入的新闻id
         let sucInsert = [];
         // 记录没有插入的新闻id
@@ -63,14 +61,10 @@ module.exports = {
         for (let item of dataArr) {
             let id = item.item_id;
 
-            //console.log("新闻id：" + id);
-
             if (item.article_type === 0 && !item.video_id) {
 
                 // 获取详情页面的数据
                 let detailData = await fetchNewsDetailData(id);
-
-                // console.log(detailData);
 
                 let p1 = item.image_list[0] && item.image_list[0].url;
                 let p2 = item.image_list[1] && item.image_list[1].url;
@@ -106,31 +100,15 @@ module.exports = {
                 };
 
                 let res = await InfoService.saveNewsDetail(newItem.id, newItem);
-                //console.log(res.code);
                 if (res.code === 0) {
-                    //console.log(id);
                     sucInsert.push(id);
                 } else {
                     errInsert.push(id);
                 }
             } else {
                 errInsert.push(id);
-                /*ctx.send({
-                    cond: 1003,
-                    data: {},
-                    msg: '不符合要求的数据！'
-                });*/
             }
         }
-        /*dataArr.forEach(async (item, index) => {
-
-
-        });*/
-
-        //let item = dataArr[4];
-
-        //console.log(sucInsert);
-        //console.log(sucInsert.join(','));
 
         ctx.send({
             code: 0,
@@ -139,9 +117,6 @@ module.exports = {
             },
             msg: '未成功插入的新闻：' + errInsert.join(",")
         });
-
-        //ctx.send(res);
-        // ctx.send(newItem);
 
     },
     getNewsDetailInfo: async (ctx, next) => {
@@ -195,7 +170,6 @@ module.exports = {
     },
     addNewsTags: async (ctx, next) => {
         let {classid, classname, classpath, showclass} = ctx.request.body;
-        // console.log(ctx.request.body);
         if (classid && classname && classpath && showclass) {
             let res = await InfoService.addTagsList(classid, ctx.request.body);
             ctx.send(res);
@@ -235,7 +209,6 @@ module.exports = {
     },
     saveNewsDetail: async (ctx, next) => {
         let {classid, title, befrom, newstext, titlepic, titlepic2, titlepic3, ptitlepic} = ctx.request.body;
-        // console.log(ctx.request.body);
         let id = uuidV1();
         let timechuo = Math.round(new Date() / 1000);
         let newstime = timechuo + '';
@@ -275,7 +248,6 @@ module.exports = {
     // 获取新闻详情数据
     getNewsDetail: async (ctx, next) => {
         let {id} = ctx.request.body;
-        // console.log(id);
         let res = await InfoService.getNewsDetailManager(id);
         if (res) {
             ctx.send({
@@ -294,7 +266,6 @@ module.exports = {
     // 编辑新闻数据
     editNewsDetail: async (ctx, next) => {
         let { id, classid, title, befrom, newstext, titlepic, titlepic2, titlepic3, ptitlepic } = ctx.request.body;
-        //console.log('参数', ctx.request.body);
         if (id && classid) {
             let res = await InfoService.editNewsDetail(id, classid, title, befrom, newstext, titlepic, titlepic2, titlepic3, ptitlepic);
             ctx.send(res);
@@ -336,7 +307,6 @@ module.exports = {
     // 后台管理-获取评论信息 type:1 新闻评论；type:2 用户评论 userId, newsDetailId
     getCommentLists: async (ctx, next) => {
         let {type = 1, userId, newsDetailId, page = 1, count = 10} = ctx.request.body;
-        // console.log(ctx.request.query);
         if (userId && type === '2') {
             // 获取用户评论
             let res = await InfoService.getCommentLists(userId);
@@ -345,9 +315,7 @@ module.exports = {
                 // 对返回的数据进行封装
                 for (let newsItem of res) {
                     for (let item of newsItem.comments) {
-                        // console.log(item.fromUser._id + '---' + userId);
                         if (item.fromUser._id == userId) {
-                            // console.log('jin');
                             let resultItem = {
                                 _id: newsItem._id,
                                 classid: newsItem.classid,
@@ -427,7 +395,6 @@ module.exports = {
         let {newsDetailId, commentId} = ctx.request.body;
         if (commentId && newsDetailId) {
             let res = await InfoService.deleteComment(commentId, newsDetailId);
-            // console.log(res);
             ctx.send(res);
         } else {
             ctx.send({
@@ -444,9 +411,6 @@ function fetch(options = {}, payload = '') {
     return new Promise((resolve, reject) => {
         const chunks = [];
         const client = http.request(options, (res) => {
-
-            // console.log('STATUS: ' + res.statusCode);
-            //console.log('HEADERS: ' + JSON.stringify(res.headers));
 
             res.on('data', (chunk) => {
                 // 分次将 buff 数据存入 chunks
@@ -497,11 +461,9 @@ async function fetchNewsListsData(tagName) {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
         }
     };
-    //console.log(options.path);
 
     // let body = await fetch(getOptions("/list/?tag=__all__&ac=wap&count=20&format=json_raw&as=A1459A1AE981F1B&cp=5AA9216F217B0E1&min_behot_time=0"), {});
     let body = await fetch(options, params);
-    // console.log("123",body);
     let json = JSON.parse(body);
 
     return json.data;
@@ -510,7 +472,7 @@ async function fetchNewsListsData(tagName) {
 // 获取新闻详情
 async function fetchNewsDetailData(id) {
     let params = qs.stringify({
-        _signature: 'dW6T8xAYL9C7BRUhGl4AhXVuk-',
+        _signature: 'BVDVpBAfX6fLO1N2Xnc.1QVQ1b',
         i: id
     });
     let options = {
@@ -521,12 +483,18 @@ async function fetchNewsDetailData(id) {
         path: `/i${id}/info/`,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-            'Content-Length': Buffer.byteLength(params)
+            'Content-Length': Buffer.byteLength(params),
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+            'Accept-Language': 'zh-CN,zh;q=0.9,zh-TW;q=0.8',
+            'Cache-Control': 'no-cache',
+            'Host': 'm.toutiao.com',
+            'pragma': 'no-cache',
+            'Cookie': 'UM_distinctid=1620ed2966d34e-047b2f6dc4894f-3c604504-1fa400-1620ed2966e43f; tt_webid=6531215512046536206; csrftoken=94b052ea800277ab73312ec6c6558687; _ba=BA0.2-20180310-51225-EHDzJLWxfHTLOb7p11Y8; _ga=GA1.2.60490855.1520670139; uuid="w:bbf84da18f0841c49c276af6b52db1bb"; W2atIF=1; __tasessionId=2hjprw0r31525788728712',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'
         }
     };
     let body = await fetch(options, params);
     let detailJson = JSON.parse(body);
-
     return detailJson.data;
 }
 
